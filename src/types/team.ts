@@ -9,6 +9,7 @@ export interface Team {
   id: string;
   name: string;
   players: Player[];
+  jerseyColor: string;
 }
 
 export interface TeamLineup {

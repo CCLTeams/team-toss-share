@@ -5,6 +5,7 @@ interface TeamContextType {
   lineup: TeamLineup;
   styleVariant: StyleVariant;
   updateTeamName: (teamId: 'teamA' | 'teamB', name: string) => void;
+  updateTeamJerseyColor: (teamId: 'teamA' | 'teamB', color: string) => void;
   addPlayer: (teamId: 'teamA' | 'teamB', name: string) => void;
   removePlayer: (teamId: 'teamA' | 'teamB', playerId: string) => void;
   toggleCaptain: (teamId: 'teamA' | 'teamB', playerId: string) => void;
@@ -18,13 +19,15 @@ const TeamContext = createContext<TeamContextType | undefined>(undefined);
 const initialLineup: TeamLineup = {
   teamA: {
     id: 'teamA',
-    name: 'Team A',
-    players: []
+    name: 'Team Blue',
+    players: [],
+    jerseyColor: 'Blue'
   },
   teamB: {
     id: 'teamB',
-    name: 'Team B', 
-    players: []
+    name: 'Team Red', 
+    players: [],
+    jerseyColor: 'Red'
   }
 };
 
@@ -38,6 +41,16 @@ export const TeamProvider: React.FC<{ children: React.ReactNode }> = ({ children
       [teamId]: {
         ...prev[teamId],
         name
+      }
+    }));
+  };
+
+  const updateTeamJerseyColor = (teamId: 'teamA' | 'teamB', color: string) => {
+    setLineup(prev => ({
+      ...prev,
+      [teamId]: {
+        ...prev[teamId],
+        jerseyColor: color
       }
     }));
   };
@@ -124,6 +137,7 @@ export const TeamProvider: React.FC<{ children: React.ReactNode }> = ({ children
       lineup,
       styleVariant,
       updateTeamName,
+      updateTeamJerseyColor,
       addPlayer,
       removePlayer,
       toggleCaptain,

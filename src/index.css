@@ -6,49 +6,57 @@
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
 
     --primary: 142 76% 36%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 210 40% 95%;
+    --secondary-foreground: 240 10% 3.9%;
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 210 40% 98%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 210 40% 98%;
+    --accent-foreground: 240 10% 3.9%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
     --ring: 142 76% 36%;
 
-    /* Sports-specific colors */
+    /* Cricket-specific colors */
     --team-a: 221 83% 53%;
     --team-a-foreground: 0 0% 98%;
     --team-b: 0 84% 60%;
     --team-b-foreground: 0 0% 98%;
     
+    /* Cricket jerseys */
+    --jersey-blue: 221 83% 53%;
+    --jersey-red: 0 84% 60%;
+    --jersey-green: 142 76% 36%;
+    --jersey-yellow: 45 100% 50%;
+    --jersey-orange: 25 95% 53%;
+    --jersey-purple: 271 81% 56%;
+    
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 86% 46%));
-    --gradient-field: linear-gradient(180deg, hsl(142 76% 36% / 0.1), hsl(142 76% 36% / 0.05));
-    --gradient-card: linear-gradient(145deg, hsl(240 10% 3.9%), hsl(240 5% 6%));
+    --gradient-field: linear-gradient(180deg, hsl(120 60% 95%), hsl(120 40% 98%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 40% 98%));
     
     /* Shadows */
-    --shadow-player: 0 4px 20px hsl(0 0% 0% / 0.3);
-    --shadow-team: 0 8px 32px hsl(0 0% 0% / 0.4);
-    --shadow-captain: 0 0 20px hsl(45 100% 50% / 0.4);
+    --shadow-player: 0 2px 10px hsl(0 0% 0% / 0.1);
+    --shadow-team: 0 4px 20px hsl(0 0% 0% / 0.1);
+    --shadow-captain: 0 0 15px hsl(45 100% 50% / 0.3);
 
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

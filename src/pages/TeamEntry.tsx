@@ -5,12 +5,22 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Crown, Trash2, ArrowRight, Users } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Plus, Crown, Trash2, ArrowRight, Users, Shirt } from 'lucide-react';
 
 const TeamEntry = () => {
   const navigate = useNavigate();
-  const { lineup, updateTeamName, addPlayer, removePlayer, toggleCaptain, updatePlayerName } = useTeam();
+  const { lineup, updateTeamName, updateTeamJerseyColor, addPlayer, removePlayer, toggleCaptain, updatePlayerName } = useTeam();
   const [newPlayerNames, setNewPlayerNames] = useState({ teamA: '', teamB: '' });
+
+  const jerseyColors = [
+    { value: 'Blue', label: '🔵 Blue' },
+    { value: 'Red', label: '🔴 Red' },
+    { value: 'Green', label: '🟢 Green' },
+    { value: 'Yellow', label: '🟡 Yellow' },
+    { value: 'Orange', label: '🟠 Orange' },
+    { value: 'Purple', label: '🟣 Purple' }
+  ];
 
   const handleAddPlayer = (teamId: 'teamA' | 'teamB') => {
     const name = newPlayerNames[teamId].trim();
@@ -55,6 +65,24 @@ const TeamEntry = () => {
                 onChange={(e) => updateTeamName('teamA', e.target.value)}
                 className="bg-background/50 border-team-a/30 focus:border-team-a"
               />
+              <div className="flex items-center gap-2">
+                <Shirt className="h-4 w-4 text-muted-foreground" />
+                <Select 
+                  value={lineup.teamA.jerseyColor} 
+                  onValueChange={(value) => updateTeamJerseyColor('teamA', value)}
+                >
+                  <SelectTrigger className="bg-background/50">
+                    <SelectValue placeholder="Jersey Color" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {jerseyColors.map((color) => (
+                      <SelectItem key={color.value} value={color.value}>
+                        {color.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </CardHeader>
             <CardContent className="space-y-4 p-6">
               {/* Add Player */}
@@ -136,6 +164,24 @@ const TeamEntry = () => {
                 onChange={(e) => updateTeamName('teamB', e.target.value)}
                 className="bg-background/50 border-team-b/30 focus:border-team-b"
               />
+              <div className="flex items-center gap-2">
+                <Shirt className="h-4 w-4 text-muted-foreground" />
+                <Select 
+                  value={lineup.teamB.jerseyColor} 
+                  onValueChange={(value) => updateTeamJerseyColor('teamB', value)}
+                >
+                  <SelectTrigger className="bg-background/50">
+                    <SelectValue placeholder="Jersey Color" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {jerseyColors.map((color) => (
+                      <SelectItem key={color.value} value={color.value}>
+                        {color.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </CardHeader>
             <CardContent className="space-y-4 p-6">
               {/* Add Player */}
