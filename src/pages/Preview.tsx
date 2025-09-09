@@ -31,12 +31,8 @@ const Preview = () => {
 
   const getJerseyColorClass = (color: string) => {
     switch (color) {
-      case 'Blue': return 'text-blue-600 bg-blue-50 border-blue-200';
-      case 'Red': return 'text-red-600 bg-red-50 border-red-200';
-      case 'Green': return 'text-green-600 bg-green-50 border-green-200';
-      case 'Yellow': return 'text-yellow-600 bg-yellow-50 border-yellow-200';
-      case 'Orange': return 'text-orange-600 bg-orange-50 border-orange-200';
-      case 'Purple': return 'text-purple-600 bg-purple-50 border-purple-200';
+      case 'Blue': return 'text-white bg-blue-600 border-blue-600';
+      case 'White': return 'text-gray-800 bg-gray-100 border-gray-300';
       default: return 'text-primary bg-primary/10 border-primary/20';
     }
   };
@@ -73,8 +69,8 @@ const Preview = () => {
             {/* Header with Logo and Info */}
             <div className="text-center mb-8 pb-6 border-b border-border">
               <div className="flex items-center justify-center mb-4">
-                <Trophy className="h-12 w-12 text-primary mr-3" />
-                <h2 className="text-5xl font-bold gradient-primary bg-clip-text text-transparent">
+                <Trophy className="h-12 w-12 text-foreground mr-3" />
+                <h2 className="text-5xl font-bold text-foreground">
                   CCL Cricket
                 </h2>
               </div>
@@ -94,7 +90,7 @@ const Preview = () => {
               {/* Team A */}
               <div className="space-y-6">
                 <div className="text-center">
-                  <h3 className="text-2xl font-bold text-team-a mb-2">
+                  <h3 className="text-2xl font-bold text-foreground mb-2">
                     {lineup.teamA.name}
                   </h3>
                   <div className="flex items-center justify-center gap-2">
@@ -134,7 +130,7 @@ const Preview = () => {
               {/* Team B */}
               <div className="space-y-6">
                 <div className="text-center">
-                  <h3 className="text-2xl font-bold text-team-b mb-2">
+                  <h3 className="text-2xl font-bold text-foreground mb-2">
                     {lineup.teamB.name}
                   </h3>
                   <div className="flex items-center justify-center gap-2">

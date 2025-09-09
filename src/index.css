@@ -35,21 +35,19 @@
     --ring: 142 76% 36%;
 
     /* Cricket-specific colors */
-    --team-a: 221 83% 53%;
+    --team-a: 162 85% 45%;
     --team-a-foreground: 0 0% 98%;
-    --team-b: 0 84% 60%;
+    --team-b: 290 85% 65%;
     --team-b-foreground: 0 0% 98%;
     
     /* Cricket jerseys */
     --jersey-blue: 221 83% 53%;
-    --jersey-red: 0 84% 60%;
-    --jersey-green: 142 76% 36%;
-    --jersey-yellow: 45 100% 50%;
-    --jersey-orange: 25 95% 53%;
-    --jersey-purple: 271 81% 56%;
+    --jersey-white: 0 0% 98%;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 86% 46%));
+    --gradient-primary: linear-gradient(135deg, hsl(162 85% 45%), hsl(200 85% 55%));
+    --gradient-team-a: linear-gradient(135deg, hsl(162 85% 45%), hsl(200 85% 55%));
+    --gradient-team-b: linear-gradient(135deg, hsl(290 85% 65%), hsl(320 85% 75%));
     --gradient-field: linear-gradient(180deg, hsl(120 60% 95%), hsl(120 40% 98%));
     --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 40% 98%));
     
@@ -165,6 +163,14 @@
 @layer utilities {
   .gradient-primary {
     background: var(--gradient-primary);
+  }
+  
+  .gradient-team-a {
+    background: var(--gradient-team-a);
+  }
+  
+  .gradient-team-b {
+    background: var(--gradient-team-b);
   }
   
   .gradient-field {

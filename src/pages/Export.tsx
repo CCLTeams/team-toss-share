@@ -1,102 +1,93 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTeam } from '@/contexts/TeamContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Textarea } from '@/components/ui/textarea';
+import { ArrowLeft, Download, MessageSquare, Copy, Share2, Image as ImageIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { 
-  ArrowLeft, 
-  Download, 
-  MessageSquare, 
-  Copy, 
-  Share2, 
-  Crown,
-  FileText,
-  Image as ImageIcon
-} from 'lucide-react';
+import html2canvas from 'html2canvas';
 
 const Export = () => {
   const navigate = useNavigate();
   const { lineup } = useTeam();
   const { toast } = useToast();
-  const [textFormat, setTextFormat] = useState('');
 
-  React.useEffect(() => {
-    generateTextFormat();
-  }, [lineup]);
-
-  const generateTextFormat = () => {
+  const formatLineupText = () => {
     const formatTeam = (team: typeof lineup.teamA) => {
       return team.players.map((player) => 
         `${player.number}. ${player.name}${player.isCaptain ? ' ⭐ (Captain)' : ''}`
       ).join('\n');
     };
 
-    const text = `🏆 MATCH LINEUP 🏆
+    return `🏆 CCL CRICKET LINEUP 🏆
 
-🔵 ${lineup.teamA.name.toUpperCase()}
+🔵 ${lineup.teamA.name.toUpperCase()} (${lineup.teamA.jerseyColor} Jersey)
 ${formatTeam(lineup.teamA)}
 
-🔴 ${lineup.teamB.name.toUpperCase()}  
+⚪ ${lineup.teamB.name.toUpperCase()} (${lineup.teamB.jerseyColor} Jersey)
 ${formatTeam(lineup.teamB)}
 
 📅 ${new Date().toLocaleDateString()}
-⚽ Created with Team Lineup Maker`;
-
-    setTextFormat(text);
+🏏 Created with CCL Cricket Lineup Maker`;
   };
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(textFormat);
+      await navigator.clipboard.writeText(formatLineupText());
       toast({
-        title: "Copied to clipboard!",
-        description: "The lineup has been copied to your clipboard.",
+        title: "Copied!",
+        description: "Lineup copied to clipboard",
       });
     } catch (err) {
       toast({
-        title: "Copy failed",
-        description: "Please copy the text manually.",
+        title: "Error",
+        description: "Failed to copy to clipboard",
         variant: "destructive",
       });
     }
   };
 
-  const shareViaWhatsApp = () => {
-    const encodedText = encodeURIComponent(textFormat);
+  const shareToWhatsApp = () => {
+    const encodedText = encodeURIComponent(formatLineupText());
     const whatsappUrl = `https://wa.me/?text=${encodedText}`;
     window.open(whatsappUrl, '_blank');
   };
 
-  const shareViaNative = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'Team Lineup',
-          text: textFormat,
-        });
-      } catch (err) {
-        if (err instanceof Error && err.name !== 'AbortError') {
-          toast({
-            title: "Share failed",
-            description: "Please copy and share manually.",
-            variant: "destructive",
-          });
-        }
-      }
-    } else {
-      copyToClipboard();
+  const downloadImage = async () => {
+    const previewElement = document.getElementById('lineup-preview');
+    if (!previewElement) {
+      toast({
+        title: "Error",
+        description: "Preview element not found",
+        variant: "destructive",
+      });
+      return;
     }
-  };
 
-  const downloadAsImage = () => {
-    // For now, we'll show a toast indicating this feature is coming
-    toast({
-      title: "Image export coming soon!",
-      description: "This feature will be available in the next update.",
-    });
+    try {
+      const canvas = await html2canvas(previewElement, {
+        backgroundColor: '#ffffff',
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+      });
+      
+      const link = document.createElement('a');
+      link.download = `ccl-cricket-lineup-${new Date().toISOString().split('T')[0]}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      
+      toast({
+        title: "Downloaded!",
+        description: "Lineup image saved to downloads",
+      });
+    } catch (err) {
+      toast({
+        title: "Error",
+        description: "Failed to generate image",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -108,54 +99,32 @@ ${formatTeam(lineup.teamB)}
           <h1 className="text-3xl font-bold">Export & Share</h1>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* Text Export */}
-          <Card>
+        <div className="grid lg:grid-cols-1 gap-8">
+          <Card className="team-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <FileText className="h-5 w-5" />
-                Text Format
+                <Copy className="h-5 w-5" />
+                Text Export
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Textarea
-                value={textFormat}
-                onChange={(e) => setTextFormat(e.target.value)}
-                className="min-h-[300px] font-mono text-sm"
-                placeholder="Generated text format will appear here..."
-              />
-              
-              <div className="space-y-2">
-                <Button
-                  onClick={copyToClipboard}
-                  className="w-full btn-bounce"
-                  variant="outline"
-                >
+              <div className="bg-muted p-4 rounded-lg max-h-64 overflow-y-auto">
+                <pre className="text-sm whitespace-pre-wrap">{formatLineupText()}</pre>
+              </div>
+              <div className="flex gap-2">
+                <Button onClick={copyToClipboard} className="flex-1">
                   <Copy className="mr-2 h-4 w-4" />
-                  Copy to Clipboard
+                  Copy Text
                 </Button>
-                
-                <Button
-                  onClick={shareViaWhatsApp}
-                  className="w-full btn-bounce bg-green-600 hover:bg-green-700"
-                >
+                <Button onClick={shareToWhatsApp} variant="outline" className="flex-1">
                   <MessageSquare className="mr-2 h-4 w-4" />
-                  Share via WhatsApp
-                </Button>
-                
-                <Button
-                  onClick={shareViaNative}
-                  className="w-full btn-bounce gradient-primary"
-                >
-                  <Share2 className="mr-2 h-4 w-4" />
-                  {navigator.share ? 'Share' : 'Copy & Share'}
+                  WhatsApp
                 </Button>
               </div>
             </CardContent>
           </Card>
 
-          {/* Image Export */}
-          <Card>
+          <Card className="team-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <ImageIcon className="h-5 w-5" />
@@ -163,53 +132,12 @@ ${formatTeam(lineup.teamB)}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {/* Preview of lineup in compact format */}
-              <div className="gradient-card p-6 rounded-lg border border-primary/20">
-                <div className="text-center mb-4">
-                  <h3 className="text-lg font-bold gradient-primary bg-clip-text text-transparent">
-                    Match Lineup
-                  </h3>
-                  <div className="flex items-center justify-center gap-4 text-sm font-semibold mt-2">
-                    <span className="text-team-a">{lineup.teamA.name}</span>
-                    <span className="text-muted-foreground">VS</span>
-                    <span className="text-team-b">{lineup.teamB.name}</span>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 text-xs">
-                  <div>
-                    <h4 className="font-bold text-team-a mb-2">{lineup.teamA.name}</h4>
-                    {lineup.teamA.players.map((player) => (
-                      <div key={player.id} className="flex items-center justify-between mb-1">
-                        <span>#{player.number} {player.name}</span>
-                        {player.isCaptain && <Crown className="h-3 w-3 text-yellow-500" />}
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-team-b mb-2">{lineup.teamB.name}</h4>
-                    {lineup.teamB.players.map((player) => (
-                      <div key={player.id} className="flex items-center justify-between mb-1">
-                        <span>#{player.number} {player.name}</span>
-                        {player.isCaptain && <Crown className="h-3 w-3 text-yellow-500" />}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="text-center text-xs text-muted-foreground mt-4 pt-2 border-t border-border">
-                  {new Date().toLocaleDateString()} • Team Lineup Maker
-                </div>
-              </div>
-
-              <Button
-                onClick={downloadAsImage}
-                className="w-full btn-bounce"
-                variant="outline"
-              >
+              <p className="text-sm text-muted-foreground">
+                Download the lineup as an image to share on WhatsApp, social media, or save for later.
+              </p>
+              <Button onClick={downloadImage} className="w-full gradient-primary">
                 <Download className="mr-2 h-4 w-4" />
-                Download as Image
-                <Badge variant="secondary" className="ml-2">Coming Soon</Badge>
+                Download PNG Image
               </Button>
             </CardContent>
           </Card>

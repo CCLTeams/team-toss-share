@@ -15,11 +15,7 @@ const TeamEntry = () => {
 
   const jerseyColors = [
     { value: 'Blue', label: '🔵 Blue' },
-    { value: 'Red', label: '🔴 Red' },
-    { value: 'Green', label: '🟢 Green' },
-    { value: 'Yellow', label: '🟡 Yellow' },
-    { value: 'Orange', label: '🟠 Orange' },
-    { value: 'Purple', label: '🟣 Purple' }
+    { value: 'White', label: '⚪ White' }
   ];
 
   const handleAddPlayer = (teamId: 'teamA' | 'teamB') => {
@@ -39,7 +35,7 @@ const TeamEntry = () => {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Users className="h-8 w-8 text-primary" />
-            <h1 className="text-4xl font-bold gradient-primary bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold text-foreground">
               Team Lineup Maker
             </h1>
           </div>
@@ -51,11 +47,11 @@ const TeamEntry = () => {
         {/* Teams Grid */}
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
           {/* Team A */}
-          <Card className="team-card border-team-a/20">
-            <CardHeader className="bg-team-a/10 border-b border-team-a/20">
+          <Card className="team-card border-team-a/20 gradient-team-a">
+            <CardHeader className="border-b border-white/20">
               <CardTitle className="flex items-center justify-between">
-                <span className="text-team-a">Team A</span>
-                <Badge variant="outline" className="border-team-a text-team-a">
+                <span className="text-white">Team A</span>
+                <Badge variant="outline" className="border-white text-white">
                   {lineup.teamA.players.length} players
                 </Badge>
               </CardTitle>
@@ -63,7 +59,7 @@ const TeamEntry = () => {
                 placeholder="Enter team name..."
                 value={lineup.teamA.name}
                 onChange={(e) => updateTeamName('teamA', e.target.value)}
-                className="bg-background/50 border-team-a/30 focus:border-team-a"
+                className="bg-white/20 border-white/30 focus:border-white text-white placeholder:text-white/70"
               />
               <div className="flex items-center gap-2">
                 <Shirt className="h-4 w-4 text-muted-foreground" />
@@ -71,7 +67,7 @@ const TeamEntry = () => {
                   value={lineup.teamA.jerseyColor} 
                   onValueChange={(value) => updateTeamJerseyColor('teamA', value)}
                 >
-                  <SelectTrigger className="bg-background/50">
+                  <SelectTrigger className="bg-white/20 border-white/30 text-white">
                     <SelectValue placeholder="Jersey Color" />
                   </SelectTrigger>
                   <SelectContent>
@@ -92,12 +88,12 @@ const TeamEntry = () => {
                   value={newPlayerNames.teamA}
                   onChange={(e) => setNewPlayerNames(prev => ({ ...prev, teamA: e.target.value }))}
                   onKeyPress={(e) => e.key === 'Enter' && handleAddPlayer('teamA')}
-                  className="bg-background/50"
+                  className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
                 />
                 <Button 
                   onClick={() => handleAddPlayer('teamA')}
                   size="icon"
-                  className="btn-bounce bg-team-a hover:bg-team-a/90"
+                  className="btn-bounce bg-white/20 hover:bg-white/30 text-white"
                 >
                   <Plus className="h-4 w-4" />
                 </Button>
@@ -113,13 +109,13 @@ const TeamEntry = () => {
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <Badge variant="secondary" className="bg-team-a/20 text-team-a">
+                      <Badge variant="secondary" className="bg-white/20 text-white">
                         #{player.number}
                       </Badge>
                       <Input
                         value={player.name}
                         onChange={(e) => updatePlayerName('teamA', player.id, e.target.value)}
-                        className="bg-transparent border-none p-0 h-auto text-foreground font-medium"
+                        className="bg-transparent border-none p-0 h-auto text-white font-medium"
                       />
                       {player.isCaptain && (
                         <Crown className="h-4 w-4 text-yellow-500" />
@@ -150,11 +146,11 @@ const TeamEntry = () => {
           </Card>
 
           {/* Team B */}
-          <Card className="team-card border-team-b/20">
-            <CardHeader className="bg-team-b/10 border-b border-team-b/20">
+          <Card className="team-card border-team-b/20 gradient-team-b">
+            <CardHeader className="border-b border-white/20">
               <CardTitle className="flex items-center justify-between">
-                <span className="text-team-b">Team B</span>
-                <Badge variant="outline" className="border-team-b text-team-b">
+                <span className="text-white">Team B</span>
+                <Badge variant="outline" className="border-white text-white">
                   {lineup.teamB.players.length} players
                 </Badge>
               </CardTitle>
@@ -162,7 +158,7 @@ const TeamEntry = () => {
                 placeholder="Enter team name..."
                 value={lineup.teamB.name}
                 onChange={(e) => updateTeamName('teamB', e.target.value)}
-                className="bg-background/50 border-team-b/30 focus:border-team-b"
+                className="bg-white/20 border-white/30 focus:border-white text-white placeholder:text-white/70"
               />
               <div className="flex items-center gap-2">
                 <Shirt className="h-4 w-4 text-muted-foreground" />
@@ -170,7 +166,7 @@ const TeamEntry = () => {
                   value={lineup.teamB.jerseyColor} 
                   onValueChange={(value) => updateTeamJerseyColor('teamB', value)}
                 >
-                  <SelectTrigger className="bg-background/50">
+                  <SelectTrigger className="bg-white/20 border-white/30 text-white">
                     <SelectValue placeholder="Jersey Color" />
                   </SelectTrigger>
                   <SelectContent>
@@ -191,12 +187,12 @@ const TeamEntry = () => {
                   value={newPlayerNames.teamB}
                   onChange={(e) => setNewPlayerNames(prev => ({ ...prev, teamB: e.target.value }))}
                   onKeyPress={(e) => e.key === 'Enter' && handleAddPlayer('teamB')}
-                  className="bg-background/50"
+                  className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
                 />
                 <Button 
                   onClick={() => handleAddPlayer('teamB')}
                   size="icon"
-                  className="btn-bounce bg-team-b hover:bg-team-b/90"
+                  className="btn-bounce bg-white/20 hover:bg-white/30 text-white"
                 >
                   <Plus className="h-4 w-4" />
                 </Button>
@@ -212,13 +208,13 @@ const TeamEntry = () => {
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <Badge variant="secondary" className="bg-team-b/20 text-team-b">
+                      <Badge variant="secondary" className="bg-white/20 text-white">
                         #{player.number}
                       </Badge>
                       <Input
                         value={player.name}
                         onChange={(e) => updatePlayerName('teamB', player.id, e.target.value)}
-                        className="bg-transparent border-none p-0 h-auto text-foreground font-medium"
+                        className="bg-transparent border-none p-0 h-auto text-white font-medium"
                       />
                       {player.isCaptain && (
                         <Crown className="h-4 w-4 text-yellow-500" />

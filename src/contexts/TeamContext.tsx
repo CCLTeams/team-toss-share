@@ -19,15 +19,15 @@ const TeamContext = createContext<TeamContextType | undefined>(undefined);
 const initialLineup: TeamLineup = {
   teamA: {
     id: 'teamA',
-    name: 'Team Blue',
+    name: 'Team A',
     players: [],
     jerseyColor: 'Blue'
   },
   teamB: {
     id: 'teamB',
-    name: 'Team Red', 
+    name: 'Team B', 
     players: [],
-    jerseyColor: 'Red'
+    jerseyColor: 'White'
   }
 };
 
