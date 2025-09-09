@@ -115,7 +115,7 @@ const TeamEntry = () => {
                       <Input
                         value={player.name}
                         onChange={(e) => updatePlayerName('teamA', player.id, e.target.value)}
-                        className="bg-transparent border-none p-0 h-auto text-white font-medium"
+                        className="bg-transparent border-none p-0 h-auto text-white font-medium placeholder:text-white/70"
                       />
                       {player.isCaptain && (
                         <Crown className="h-4 w-4 text-yellow-500" />
@@ -214,7 +214,7 @@ const TeamEntry = () => {
                       <Input
                         value={player.name}
                         onChange={(e) => updatePlayerName('teamB', player.id, e.target.value)}
-                        className="bg-transparent border-none p-0 h-auto text-white font-medium"
+                        className="bg-transparent border-none p-0 h-auto text-white font-medium placeholder:text-white/70"
                       />
                       {player.isCaptain && (
                         <Crown className="h-4 w-4 text-yellow-500" />

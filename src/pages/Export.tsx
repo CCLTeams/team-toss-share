@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, Download, MessageSquare, Copy, Share2, Image as ImageIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import html2canvas from 'html2canvas';
+import LineupPreview from '@/components/LineupPreview';
 
 const Export = () => {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ ${formatTeam(lineup.teamB)}
   };
 
   const downloadImage = async () => {
-    const previewElement = document.getElementById('lineup-preview');
+    const previewElement = document.getElementById('export-preview');
     if (!previewElement) {
       toast({
         title: "Error",
@@ -70,6 +71,9 @@ ${formatTeam(lineup.teamB)}
         scale: 2,
         useCORS: true,
         allowTaint: true,
+        height: previewElement.scrollHeight,
+        width: previewElement.scrollWidth,
+        logging: false
       });
       
       const link = document.createElement('a');
@@ -100,6 +104,25 @@ ${formatTeam(lineup.teamB)}
         </div>
 
         <div className="grid lg:grid-cols-1 gap-8">
+          {/* Preview for Export */}
+          <Card className="team-card">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <ImageIcon className="h-5 w-5" />
+                Lineup Preview
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="mb-4">
+                <LineupPreview forExport={true} />
+              </div>
+              <Button onClick={downloadImage} className="w-full gradient-primary">
+                <Download className="mr-2 h-4 w-4" />
+                Download PNG Image
+              </Button>
+            </CardContent>
+          </Card>
+
           <Card className="team-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -121,24 +144,6 @@ ${formatTeam(lineup.teamB)}
                   WhatsApp
                 </Button>
               </div>
-            </CardContent>
-          </Card>
-
-          <Card className="team-card">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <ImageIcon className="h-5 w-5" />
-                Image Export
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-sm text-muted-foreground">
-                Download the lineup as an image to share on WhatsApp, social media, or save for later.
-              </p>
-              <Button onClick={downloadImage} className="w-full gradient-primary">
-                <Download className="mr-2 h-4 w-4" />
-                Download PNG Image
-              </Button>
             </CardContent>
           </Card>
         </div>
