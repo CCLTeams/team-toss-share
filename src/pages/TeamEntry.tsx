@@ -39,7 +39,7 @@ const TeamEntry = () => {
               Team Lineup Maker
             </h1>
           </div>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-foreground/70 text-lg">
             Create your team lineups and share them instantly
           </p>
         </div>

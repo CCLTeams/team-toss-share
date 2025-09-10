@@ -15,10 +15,10 @@ const Index = () => {
           <div className="w-32 h-4 gradient-primary rounded-full"></div>
         </div>
         
-        <h1 className="text-5xl font-bold mb-4 gradient-primary bg-clip-text text-transparent">
+        <h1 className="text-5xl font-bold mb-4 text-foreground">
           CCL Cricket Lineup
         </h1>
-        <p className="text-xl text-muted-foreground mb-8">
+        <p className="text-xl text-foreground/80 mb-8">
           Create professional cricket team lineups and share them instantly
         </p>
         
@@ -37,19 +37,19 @@ const Index = () => {
             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-primary-foreground font-bold">1</span>
             </div>
-            <p className="text-muted-foreground">Create Teams</p>
+            <p className="text-foreground/70">Create Teams</p>
           </div>
           <div>
             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-primary-foreground font-bold">2</span>
             </div>
-            <p className="text-muted-foreground">Preview</p>
+            <p className="text-foreground/70">Preview</p>
           </div>
           <div>
             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-primary-foreground font-bold">3</span>
             </div>
-            <p className="text-muted-foreground">Share</p>
+            <p className="text-foreground/70">Share</p>
           </div>
         </div>
       </div>
