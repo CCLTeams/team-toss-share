@@ -69,7 +69,7 @@ const LineupPreview: React.FC<LineupPreviewProps> = ({ forExport = false }) => {
           )}
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 relative">
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 relative">
           {/* VS indicator for export */}
           {forExport && (
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
@@ -80,28 +80,28 @@ const LineupPreview: React.FC<LineupPreviewProps> = ({ forExport = false }) => {
           )}
           
           {/* Team A */}
-          <div className={`space-y-6 ${forExport ? 'bg-white/5 p-6 rounded-xl border border-white/20' : ''}`}>
+          <div className={`space-y-4 ${forExport ? 'bg-white/5 p-4 sm:p-6 rounded-xl border border-white/20' : ''}`}>
             <div className="text-center">
-              <h3 className={`text-3xl font-bold mb-3 ${forExport ? 'text-white' : 'text-foreground'}`}>
+              <h3 className={`text-xl sm:text-2xl lg:text-3xl font-bold mb-2 ${forExport ? 'text-white' : 'text-foreground'}`}>
                 {lineup.teamA.name}
               </h3>
-              <div className="flex items-center justify-center gap-2">
-                <Shirt className={`h-5 w-5 ${forExport ? 'text-blue-200' : ''}`} />
-                <Badge className={`${getJerseyColorClass(lineup.teamA.jerseyColor)} border font-medium px-3 py-1`}>
-                  {lineup.teamA.jerseyColor} Jersey
+              <div className="flex items-center justify-center gap-1 sm:gap-2">
+                <Shirt className={`h-4 w-4 sm:h-5 sm:w-5 ${forExport ? 'text-blue-200' : ''}`} />
+                <Badge className={`${getJerseyColorClass(lineup.teamA.jerseyColor)} border font-medium px-2 py-1 text-xs sm:text-sm`}>
+                  {lineup.teamA.jerseyColor}
                 </Badge>
               </div>
               {forExport && (
-                <div className="text-blue-200 text-sm mt-2 font-medium">
+                <div className="text-blue-200 text-xs sm:text-sm mt-1 font-medium">
                   {lineup.teamA.players.length} Players
                 </div>
               )}
             </div>
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {lineup.teamA.players.map((player) => (
                 <div
                   key={player.id}
-                  className={`flex items-center justify-between p-4 rounded-lg ${
+                  className={`flex items-center justify-between p-2 sm:p-4 rounded-lg ${
                     forExport 
                       ? 'bg-white/10 border border-white/20 backdrop-blur-sm' 
                       : styleVariant === 'minimal' 
@@ -109,21 +109,21 @@ const LineupPreview: React.FC<LineupPreviewProps> = ({ forExport = false }) => {
                         : 'bg-white/80 shadow-sm border border-gray-200'
                   } ${player.isCaptain ? 'ring-2 ring-yellow-400/50 bg-yellow-400/10' : ''}`}
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2 sm:gap-4">
                     <Badge 
                       variant="secondary" 
-                      className={`${getJerseyColorClass(lineup.teamA.jerseyColor)} font-bold min-w-[3rem] justify-center text-sm`}
+                      className={`${getJerseyColorClass(lineup.teamA.jerseyColor)} font-bold min-w-[2rem] sm:min-w-[3rem] justify-center text-xs sm:text-sm`}
                     >
                       #{player.number}
                     </Badge>
-                    <span className={`font-medium text-lg ${forExport ? 'text-white' : 'text-foreground'}`}>
+                    <span className={`font-medium text-sm sm:text-lg truncate ${forExport ? 'text-white' : 'text-foreground'}`}>
                       {player.name}
                     </span>
                   </div>
                   {player.isCaptain && (
-                    <div className="flex items-center gap-2">
-                      <Crown className="h-6 w-6 text-yellow-400" />
-                      {forExport && <span className="text-yellow-400 text-xs font-bold">C</span>}
+                    <div className="flex items-center gap-1">
+                      <Crown className="h-4 w-4 sm:h-6 sm:w-6 text-yellow-400" />
+                      {forExport && <span className="text-yellow-400 text-xs font-bold hidden sm:inline">C</span>}
                     </div>
                   )}
                 </div>
@@ -132,19 +132,19 @@ const LineupPreview: React.FC<LineupPreviewProps> = ({ forExport = false }) => {
           </div>
 
           {/* Team B */}
-          <div className={`space-y-6 ${forExport ? 'bg-white/5 p-6 rounded-xl border border-white/20' : ''}`}>
+          <div className={`space-y-4 ${forExport ? 'bg-white/5 p-4 sm:p-6 rounded-xl border border-white/20' : ''}`}>
             <div className="text-center">
-              <h3 className={`text-3xl font-bold mb-3 ${forExport ? 'text-white' : 'text-foreground'}`}>
+              <h3 className={`text-xl sm:text-2xl lg:text-3xl font-bold mb-2 ${forExport ? 'text-white' : 'text-foreground'}`}>
                 {lineup.teamB.name}
               </h3>
-              <div className="flex items-center justify-center gap-2">
-                <Shirt className={`h-5 w-5 ${forExport ? 'text-blue-200' : ''}`} />
-                <Badge className={`${getJerseyColorClass(lineup.teamB.jerseyColor)} border font-medium px-3 py-1`}>
-                  {lineup.teamB.jerseyColor} Jersey
+              <div className="flex items-center justify-center gap-1 sm:gap-2">
+                <Shirt className={`h-4 w-4 sm:h-5 sm:w-5 ${forExport ? 'text-blue-200' : ''}`} />
+                <Badge className={`${getJerseyColorClass(lineup.teamB.jerseyColor)} border font-medium px-2 py-1 text-xs sm:text-sm`}>
+                  {lineup.teamB.jerseyColor}
                 </Badge>
               </div>
               {forExport && (
-                <div className="text-blue-200 text-sm mt-2 font-medium">
+                <div className="text-blue-200 text-xs sm:text-sm mt-1 font-medium">
                   {lineup.teamB.players.length} Players
                 </div>
               )}
