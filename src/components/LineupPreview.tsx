@@ -69,9 +69,18 @@ const LineupPreview: React.FC<LineupPreviewProps> = ({ forExport = false }) => {
           )}
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-8 relative">
+          {/* VS indicator for export */}
+          {forExport && (
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+              <div className="bg-yellow-400 text-blue-900 px-4 py-2 rounded-full font-bold text-xl shadow-lg">
+                VS
+              </div>
+            </div>
+          )}
+          
           {/* Team A */}
-          <div className="space-y-6">
+          <div className={`space-y-6 ${forExport ? 'bg-white/5 p-6 rounded-xl border border-white/20' : ''}`}>
             <div className="text-center">
               <h3 className={`text-3xl font-bold mb-3 ${forExport ? 'text-white' : 'text-foreground'}`}>
                 {lineup.teamA.name}
@@ -82,6 +91,11 @@ const LineupPreview: React.FC<LineupPreviewProps> = ({ forExport = false }) => {
                   {lineup.teamA.jerseyColor} Jersey
                 </Badge>
               </div>
+              {forExport && (
+                <div className="text-blue-200 text-sm mt-2 font-medium">
+                  {lineup.teamA.players.length} Players
+                </div>
+              )}
             </div>
             <div className="space-y-3">
               {lineup.teamA.players.map((player) => (
@@ -109,7 +123,7 @@ const LineupPreview: React.FC<LineupPreviewProps> = ({ forExport = false }) => {
                   {player.isCaptain && (
                     <div className="flex items-center gap-2">
                       <Crown className="h-6 w-6 text-yellow-400" />
-                      {forExport && <span className="text-yellow-400 text-sm font-bold">CAPTAIN</span>}
+                      {forExport && <span className="text-yellow-400 text-xs font-bold">C</span>}
                     </div>
                   )}
                 </div>
@@ -118,7 +132,7 @@ const LineupPreview: React.FC<LineupPreviewProps> = ({ forExport = false }) => {
           </div>
 
           {/* Team B */}
-          <div className="space-y-6">
+          <div className={`space-y-6 ${forExport ? 'bg-white/5 p-6 rounded-xl border border-white/20' : ''}`}>
             <div className="text-center">
               <h3 className={`text-3xl font-bold mb-3 ${forExport ? 'text-white' : 'text-foreground'}`}>
                 {lineup.teamB.name}
@@ -129,6 +143,11 @@ const LineupPreview: React.FC<LineupPreviewProps> = ({ forExport = false }) => {
                   {lineup.teamB.jerseyColor} Jersey
                 </Badge>
               </div>
+              {forExport && (
+                <div className="text-blue-200 text-sm mt-2 font-medium">
+                  {lineup.teamB.players.length} Players
+                </div>
+              )}
             </div>
             <div className="space-y-3">
               {lineup.teamB.players.map((player) => (
@@ -156,7 +175,7 @@ const LineupPreview: React.FC<LineupPreviewProps> = ({ forExport = false }) => {
                   {player.isCaptain && (
                     <div className="flex items-center gap-2">
                       <Crown className="h-6 w-6 text-yellow-400" />
-                      {forExport && <span className="text-yellow-400 text-sm font-bold">CAPTAIN</span>}
+                      {forExport && <span className="text-yellow-400 text-xs font-bold">C</span>}
                     </div>
                   )}
                 </div>
